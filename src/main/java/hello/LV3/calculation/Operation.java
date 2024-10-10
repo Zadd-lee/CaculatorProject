@@ -37,4 +37,15 @@ public enum Operation {
 
     // 열거 객체의 메소드에 사용될 추상 메소드 정의
     public abstract double apply(double x, double y);
+
+
+    public static Operation fromCode(String code) {
+        for (Operation color : Operation.values()) {
+            if (color.symbol.equals(code)) {
+                return color;
+            }
+        }
+        throw new IllegalArgumentException("Unknown code: " + code);
+    }
+
 }
