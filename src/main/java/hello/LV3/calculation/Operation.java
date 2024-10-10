@@ -1,4 +1,4 @@
-package hello.LV3;
+package hello.LV3.calculation;
 
 public enum Operation {
     PLUS("+") {
