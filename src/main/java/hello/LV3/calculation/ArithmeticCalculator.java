@@ -15,9 +15,8 @@ public class ArithmeticCalculator {
 
 
 
-    public Double Calculator (double a, double b, String operator) throws ArithmeticException {
-        Operation operation = Operation.valueOf(operator);
-        Double result = operation.apply(a, b);
+    public Double Calculate(double a, double b, Operation operator) throws ArithmeticException,IllegalArgumentException {
+        Double result = operator.apply(a, b);
         resultHistory.add(result);
         return result;
     }
