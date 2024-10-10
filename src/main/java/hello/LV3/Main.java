@@ -8,23 +8,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser();
+        ArithmeticCalculator cal = new ArithmeticCalculator();
 
-        System.out.println(Operation.MULTI);
         while (true) {
             //Double 사이즈의 값 받아오기
-            System.out.println("첫번째 숫자를 입력하세요");
-            String inputA = sc.nextLine();
-            System.out.println("두번째 숫자를 입력하세요");
-            String inputB = sc.nextLine();
-            System.out.println("사칙 연산을 입력하세요");
-            String operator = sc.nextLine();
 
-            //계산 수행
-            ArithmeticCalculator cal = new ArithmeticCalculator();
             try {
-                Double result = cal.Calculator(inputA, inputB, operator);
+                System.out.println("첫번째 숫자를 입력하세요");
+                double inputA = parser.parseInput(sc.nextLine());
+                System.out.println("두번째 숫자를 입력하세요");
+                double inputB = parser.parseInput(sc.nextLine());
+                System.out.println("사칙 연산을 입력하세요");
+                Operation operator = parser.parseOperator(sc.nextLine());
+
+                //계산 수행
+                Double result = cal.Calculate(inputA, inputB, operator);
+                System.out.println(result);
             } catch (ArithmeticException e) {
                 System.out.println("0 으로 나눌 수 없습니다.");
+            } catch (NumberFormatException e) {
+                System.out.println("올바른 숫자 값을 넣으세요");
+            } catch (IllegalArgumentException e) {
+                System.out.println("올바른 연산자를 넣으세요");
             }
 
 
@@ -34,7 +40,7 @@ public class Main {
             //메세지가 remove 인 경우 Calculator의 가장 먼저 계산된 결과를 삭제
             String command = sc.nextLine();
             if (command.equals("exit")) break;
-            if(command.equals("remove")) {cal.removeResult();}
+            if(command.equals("remove")) cal.removeResult();
         }
     }
 }
