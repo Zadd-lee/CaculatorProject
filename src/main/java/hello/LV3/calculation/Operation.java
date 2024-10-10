@@ -1,44 +1,29 @@
 package hello.LV3.calculation;
 
-public enum Operation {
-    PLUS("+") {
-        public double apply(double x, double y) {
-            return x + y;
-        }
-    },
-    MINUS("-") {
-        public double apply(double x, double y) {
-            return x - y;
-        }
-    },
-    MULTI("*") {
-        public double apply(double x, double y) {
-            return x * y;
-        }
-    },
-    DIVIDE("/") {
-        public double apply(double x, double y) {
-            return x / y;
-        }
-    };
+// 함수형 인터페이스 임포트
+import java.util.function.DoubleBinaryOperator;
 
-    // 클래스 생성자와 멤버
+public enum Operation {
+    PLUS("+", (x, y) -> x + y),
+    MINUS("-", (x, y) -> x - y),
+    TIMES("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
+
+    private final DoubleBinaryOperator op; // 람다식을 저장할 필드
+
     private final String symbol;
 
-    Operation(String symbol) {
+    Operation(String symbol, DoubleBinaryOperator op) {
         this.symbol = symbol;
+        this.op = op;
     }
 
-    // toString을 재정의하여 열거 객체의 매핑된 문자열을 반환하도록
     @Override
-    public String toString() {
-        return symbol;
+    public String toString() { return symbol; }
+
+    public double apply(double x, double y) {
+        return op.applyAsDouble(x, y);
     }
-
-    // 열거 객체의 메소드에 사용될 추상 메소드 정의
-    public abstract double apply(double x, double y);
-
-
     public static Operation fromCode(String code) {
         for (Operation color : Operation.values()) {
             if (color.symbol.equals(code)) {
