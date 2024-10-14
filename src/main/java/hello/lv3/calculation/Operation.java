@@ -6,7 +6,7 @@ import java.util.function.DoubleBinaryOperator;
 public enum Operation {
     PLUS("+", (x, y) -> x + y),
     MINUS("-", (x, y) -> x - y),
-    TIMES("*", (x, y) -> x * y),
+    MULTI("*", (x, y) -> x * y),
     DIVIDE("/", (x, y) -> x / y);
 
     private final DoubleBinaryOperator op; // 람다식을 저장할 필드
