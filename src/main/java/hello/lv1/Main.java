@@ -1,4 +1,4 @@
-package hello.LV1;
+package hello.lv1;
 
 import java.util.Scanner;
 

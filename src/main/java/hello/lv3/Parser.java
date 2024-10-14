@@ -1,6 +1,6 @@
-package hello.LV3;
+package hello.lv3;
 
-import hello.LV3.calculation.Operation;
+import hello.lv3.calculation.Operation;
 
 
 public class Parser {

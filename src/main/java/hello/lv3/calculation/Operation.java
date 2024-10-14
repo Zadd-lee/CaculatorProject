@@ -1,4 +1,4 @@
-package hello.LV3.calculation;
+package hello.lv3.calculation;
 
 // 함수형 인터페이스 임포트
 import java.util.function.DoubleBinaryOperator;
