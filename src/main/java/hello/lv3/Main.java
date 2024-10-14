@@ -9,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
-        ArithmeticCalculator cal = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> doubleArithmeticCalculator = new ArithmeticCalculator<>();
+        ArithmeticCalculator<Integer> integerArithmeticCalculator = new ArithmeticCalculator<>();
 
         while (true) {
             //Double 사이즈의 값 받아오기
@@ -23,7 +24,7 @@ public class Main {
                 Operation operator = parser.parseOperator(sc.nextLine());
 
                 //계산 수행
-                Double result = cal.Calculate(inputA, inputB, operator);
+                Double result = doubleArithmeticCalculator.Calculate(inputA, inputB, operator);
                 System.out.println(result);
             } catch (ArithmeticException e) {
                 System.out.println("0 으로 나눌 수 없습니다.");
@@ -40,7 +41,7 @@ public class Main {
             //메세지가 remove 인 경우 Calculator의 가장 먼저 계산된 결과를 삭제
             String command = sc.nextLine();
             if (command.equals("exit")) break;
-            if(command.equals("remove")) cal.removeResult();
+//            if(command.equals("remove")) cal.removeResult();
         }
     }
 }
