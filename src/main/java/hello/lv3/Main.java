@@ -9,13 +9,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
-        ArithmeticCalculator<Double> doubleArithmeticCalculator = new ArithmeticCalculator<>();
-        ArithmeticCalculator<Integer> integerArithmeticCalculator = new ArithmeticCalculator<>();
+        //input 값이 int -> double 이므로 double 타입에 맞는 generic 함수 선언
+        ArithmeticCalculator<Double> cal = new ArithmeticCalculator<>();
 
         while (true) {
-            //Double 사이즈의 값 받아오기
-
             try {
+
+
                 System.out.println("첫번째 숫자를 입력하세요");
                 double inputA = parser.parseInput(sc.nextLine());
                 System.out.println("두번째 숫자를 입력하세요");
@@ -23,8 +23,9 @@ public class Main {
                 System.out.println("사칙 연산을 입력하세요");
                 Operation operator = parser.parseOperator(sc.nextLine());
 
+
                 //계산 수행
-                Double result = doubleArithmeticCalculator.Calculate(inputA, inputB, operator);
+                Double result = cal.Calculate(inputA, inputB, operator);
                 System.out.println(result);
             } catch (ArithmeticException e) {
                 System.out.println("0 으로 나눌 수 없습니다.");
@@ -35,13 +36,20 @@ public class Main {
             }
 
 
-            System.out.println("다시 진행하시겠습니까? (exit 입력 시 종료)");
-            System.out.println("가장 먼저 계산된 결과를 지우시겠습니까? (remove 입력 시 삭제)");
-            //메세지가 exit인 경우 반복문 탈출
-            //메세지가 remove 인 경우 Calculator의 가장 먼저 계산된 결과를 삭제
+            System.out.println("----command----");
+            System.out.println("계산기 끝내기(exit 입력 시 종료)");
+            System.out.println("가장 먼저 계산된 결과를 삭제 (remove 입력 시 삭제)");
+            System.out.println("계산 결과를 보기 (history 입력 시 출력)");
+            System.out.println("가장 큰 계산 결과 보기 (maxHistory 입력 시 출력)");
             String command = sc.nextLine();
+            //메세지가 exit인 경우 반복문 탈출
             if (command.equals("exit")) break;
-//            if(command.equals("remove")) cal.removeResult();
+            //메세지가 remove 인 경우 Calculator의 가장 먼저 계산된 결과를 삭제
+            if(command.equals("remove")) cal.removeResult();
+            //메세지가 hisotory일 경우 결과값 모두 출력
+            if(command.equals("history")) cal.getResultHistory().stream().forEach(f->{System.out.println(f);});
+            //maxHistory 일 경우 결과값에서 가장 큰 값 출력
+            if(command.equals("maxHistory")) System.out.println(cal.getResultHistory().stream().mapToDouble(x->x).max().getAsDouble());
         }
     }
 }
